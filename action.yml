@@ -1,6 +1,9 @@
 name: "Get Docker Hub Tag"
 description: "Get the latest tag for an image on Docker Hub"
 author: "Jacob Tomlinson"
+branding:
+  icon: tag
+  color: purple
 inputs:
   org:
     description: The Docker Hub org
