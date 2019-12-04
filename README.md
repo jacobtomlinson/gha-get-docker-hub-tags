@@ -11,7 +11,7 @@ Add following step to the end of your workflow:
 ```yaml
     - name: Get latest tag
       id: latest_tag
-      uses: jacobtomlinson/gha-get-docker-hub-tags
+      uses: jacobtomlinson/gha-get-docker-hub-tags@0.1.1
       with:
         org: 'mysql'  # Docker Hub user or organisation name
         repo: 'mysql-server'  # Docker Hub repository name
@@ -19,5 +19,5 @@ Add following step to the end of your workflow:
     # Optionally check the tag we got back
     - name: Check outputs
       run: |
-        echo "Pull Request Number - ${{ steps.latest_tag.outputs.tag }}"
+        echo "Latest Image Tag - ${{ steps.latest_tag.outputs.tag }}"
 ```
