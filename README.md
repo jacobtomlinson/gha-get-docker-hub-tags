@@ -1,5 +1,21 @@
-# Container Action Template
+# Get Docker Hub Tag
 
-To get started, click the `Use this template` button on this repository [which will create a new repository based on this template](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/).
+Get the latest tag for an image on Docker Hub.
 
-For info on how to build your first Container action, see the [toolkit docs folder](https://github.com/actions/toolkit/blob/master/docs/container-action.md).
+## Usage
+
+Add following step to the end of your workflow:
+
+```yaml
+    - name: Get latest tag
+      id: latest_tag
+      uses: jacobtomlinson/gha-get-docker-hub-tags
+      with:
+        org: 'mysql'  # Docker Hub user or organisation name
+        repo: 'mysql-server'  # Docker Hub repository name
+
+    # Optionally check the tag we got back
+    - name: Check outputs
+      run: |
+        echo "Pull Request Number - ${{ steps.latest_tag.outputs.tag }}"
+```

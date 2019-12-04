@@ -1,12 +1,14 @@
-name: 'Container Action Template'
-description: 'Get started with Container actions'
-author: 'GitHub'
-inputs: 
-  myInput:
-    description: 'Input to use'
-    default: 'world'
+name: "Get Docker Hub Tag"
+description: "Get the latest tag for an image on Docker Hub"
+author: "Jacob Tomlinson"
+inputs:
+  org:
+    description: The Docker Hub org
+  repo:
+    description: The Docker Hub repo
+outputs:
+  tag:
+    description: The latest tag
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.myInput }}
+  using: "docker"
+  image: "Dockerfile"
