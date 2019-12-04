@@ -7,8 +7,10 @@ branding:
 inputs:
   org:
     description: The Docker Hub org
+    required: true
   repo:
     description: The Docker Hub repo
+    required: true
 outputs:
   tag:
     description: The latest tag
