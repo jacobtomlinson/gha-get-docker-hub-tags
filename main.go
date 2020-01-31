@@ -1,15 +1,16 @@
 package main
 
 import (
-	"fmt"
-	"os"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"time"
+	"os"
 	"regexp"
-    "sort"
+	"time"
+
+	"github.com/coreos/go-semver/semver"
 )
 
 type dhtag struct {
@@ -17,7 +18,7 @@ type dhtag struct {
 }
 
 type dhrepo struct {
-	Count int `json:"count"`
+	Count   int     `json:"count"`
 	Results []dhtag `json:"results"`
 }
 
@@ -55,11 +56,11 @@ func main() {
 		log.Fatal(unmarshalErr)
 	}
 
-	var tags []string
+	var tags []*semver.Version
 	for _, tag := range dhrepo1.Results {
 		matched, _ := regexp.MatchString(`.*\..*\..*`, tag.Name)
 		if matched {
-			tags = append(tags, tag.Name)
+			tags = append(tags, semver.New(tag.Name))
 		}
 	}
 
@@ -67,6 +68,6 @@ func main() {
 		log.Fatal(fmt.Sprintf(`Unable to find tags for %s/%s`, org, repo))
 	}
 
-	sort.Strings(tags)
+	semver.Sort(tags)
 	fmt.Println(fmt.Sprintf(`::set-output name=tag::%s`, tags[len(tags)-1]))
 }
