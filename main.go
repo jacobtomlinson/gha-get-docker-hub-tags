@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strings"
 	"time"
 
 	"github.com/coreos/go-semver/semver"
@@ -60,7 +61,7 @@ func main() {
 	for _, tag := range dhrepo1.Results {
 		matched, _ := regexp.MatchString(`.*\..*\..*`, tag.Name)
 		if matched {
-			tags = append(tags, semver.New(tag.Name))
+			tags = append(tags, semver.New(strings.Trim(tag.Name, "vV")))
 		}
 	}
 
